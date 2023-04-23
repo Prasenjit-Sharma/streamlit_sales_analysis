@@ -2,14 +2,32 @@ import pandas as pd
 from read_data import ReadData
 from data_analysis import DataAnalysis
 import streamlit as st
+from streamlit_option_menu import option_menu
+from streamlit_extras.switch_page_button import switch_page
 
-data = ReadData()
+
+# Read Data
+@st.cache_data
+def read_database():
+    d = ReadData()
+    return d
+
+
+# Create the initial dataframes
+data = read_database()
 omc_master = data.omc_master
 omc_sales = data.omc_sales
 # print(omc_master.columns)
+st.session_state.omc_master=data.omc_master
+st.session_state.omc_sales=data.omc_sales
 
-curr_month = ["Mar"]
-curr_fy = ['22-23']
+# Horizontal Option Menu
+selected = option_menu(None, ["Home", "Upload", "Tasks", 'Settings'],
+                       icons=['house', 'cloud-upload', "list-task", 'gear'],
+                       menu_icon="cast", default_index=0, orientation="horizontal")
+selected
+
+
 product = ["MS"]
 SA = ['JODHPUR A']
 OMC = ['HPC', 'BPC', 'IOC']
