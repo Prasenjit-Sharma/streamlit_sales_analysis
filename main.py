@@ -17,7 +17,7 @@ def read_database():
 data = read_database()
 omc_master = data.omc_master
 omc_sales = data.omc_sales
-# print(omc_master.columns)
+print(omc_master.columns)
 st.session_state.omc_master=data.omc_master
 st.session_state.omc_sales=data.omc_sales
 
